@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+  <title>Motion Portfolio · Dark</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* тёмная палитра */
+    body {
+      background-color: #12161c;
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      color: #eaeef2;
+    }
+    .portfolio-header {
+      background: linear-gradient(145deg, #0b0f14, #1a212b);
+      color: #f0f4f8;
+      padding: 2rem 0 1.5rem;
+      border-bottom: 4px solid #f39c12;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+    }
+    .hero-block {
+      background: #0f141b;
+      padding: 2.5rem 0 2rem;
+      border-bottom: 1px solid #1e262f;
+    }
+    .hero-logo {
+      max-width: 200px;
+      width: 100%;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.7);
+      border: 2px solid #2d3845;
+      transition: 0.2s;
+    }
+    .hero-logo:hover {
+      border-color: #f39c12;
+      transform: scale(1.02);
+    }
+    .service-badge {
+      background: #1a212b;
+      border: 1px solid #2d3845;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.9rem;
+      color: #d0d9e2;
+      transition: 0.15s;
+    }
+    .service-badge i {
+      color: #f39c12;
+      margin-right: 6px;
+    }
+    .service-badge:hover {
+      border-color: #f39c12;
+      background: #212b36;
+    }
+    .section-title {
+      border-left: 6px solid #f39c12;
+      padding-left: 1rem;
+      font-weight: 600;
+      color: #f0f4f8;
+    }
+    .category-title {
+      color: #f0f4f8;
+      font-weight: 600;
+      border-bottom: 2px solid #f39c12;
+      padding-bottom: 0.5rem;
+      display: inline-block;
+      margin-bottom: 1.2rem;
+    }
+    .video-card {
+      background: #1e262f;
+      border-radius: 20px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.6);
+      transition: 0.25s ease;
+      overflow: hidden;
+      height: 100%;
+      border: 1px solid #2d3845;
+    }
+    .video-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 36px rgba(0,0,0,0.8);
+      border-color: #f39c12;
+    }
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      background: #0a0e12;
+    }
+    .video-wrapper video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      background: #0a0e12;
+    }
+    .card-body {
+      padding: 1.2rem 1.2rem 1.5rem;
+      color: #dce3eb;
+    }
+    .card-body h5 {
+      color: #f0f4f8;
+    }
+    .social-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #1e262f;
+      color: #eaeef2;
+      font-size: 1.5rem;
+      transition: 0.2s;
+      text-decoration: none;
+      border: 1px solid #2d3845;
+    }
+    .social-icon:hover {
+      background: #f39c12;
+      color: #0b0f14;
+      transform: scale(1.05);
+      border-color: #f39c12;
+    }
+    .lang-btn {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.25);
+      color: #d0d9e2;
+      padding: 0.2rem 1rem;
+      border-radius: 40px;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .lang-btn.active {
+      background: #f39c12;
+      border-color: #f39c12;
+      color: #0b0f14;
+    }
+    .lang-btn:hover {
+      background: rgba(255,255,255,0.08);
+    }
+    .lang-btn.active:hover {
+      background: #f39c12;
+    }
+    /* === КАРУСЕЛЬ ОТЗЫВОВ === */
+    .review-carousel-wrapper {
+      background: #0f141b;
+      border-radius: 20px;
+      padding: 1.5rem 1rem;
+      border: 1px solid #1e262f;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+    }
+    .review-carousel-wrapper .carousel-inner {
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .review-carousel-wrapper .carousel-item {
+      background: #1a212b;
+      border-radius: 16px;
+      overflow: hidden;
+      transition: 0.4s ease;
+    }
+    .review-carousel-wrapper .carousel-item img {
+      width: 100%;
+      height: 400px;
+      object-fit: contain;
+      background: #0f141b;
+      display: block;
+      padding: 0.5rem;
+    }
+    .review-carousel-wrapper .carousel-control-prev,
+    .review-carousel-wrapper .carousel-control-next {
+      width: 48px;
+      height: 48px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      border-radius: 50%;
+      border: 1px solid #f39c12;
+      opacity: 0.9;
+      transition: 0.2s;
+      margin: 0 8px;
+    }
+    .review-carousel-wrapper .carousel-control-prev:hover,
+    .review-carousel-wrapper .carousel-control-next:hover {
+      background: #f39c12;
+      opacity: 1;
+    }
+    .review-carousel-wrapper .carousel-control-prev-icon,
+    .review-carousel-wrapper .carousel-control-next-icon {
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+    }
+    .review-carousel-wrapper .carousel-indicators {
+      bottom: -2.5rem;
+    }
+    .review-carousel-wrapper .carousel-indicators button {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: 1px solid #f39c12;
+      background: transparent;
+      margin: 0 6px;
+      transition: 0.2s;
+    }
+    .review-carousel-wrapper .carousel-indicators button.active {
+      background: #f39c12;
+      border-color: #f39c12;
+    }
+    .review-carousel-wrapper .carousel-caption {
+      background: rgba(0,0,0,0.6);
+      border-radius: 12px;
+      padding: 0.5rem 1.2rem;
+      bottom: 1rem;
+      max-width: 80%;
+      margin: 0 auto;
+      left: 10%;
+      right: 10%;
+      backdrop-filter: blur(4px);
+    }
+    .review-carousel-wrapper .carousel-caption h5 {
+      color: #f0f4f8;
+      font-weight: 600;
+      font-size: 1rem;
+      margin-bottom: 0.1rem;
+    }
+    .review-carousel-wrapper .carousel-caption p {
+      color: #d0d9e2;
+      font-size: 0.85rem;
+      margin-bottom: 0;
+    }
+    .review-carousel-wrapper .carousel-caption .stars {
+      color: #f39c12;
+      letter-spacing: 2px;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      .review-carousel-wrapper .carousel-item img {
+        height: 280px;
+      }
+      .review-carousel-wrapper .carousel-control-prev,
+      .review-carousel-wrapper .carousel-control-next {
+        width: 36px;
+        height: 36px;
+        margin: 0 2px;
+      }
+    }
+    .footer-note {
+      background: #0b0f14;
+      color: #9aa8b9;
+      border-top: 1px solid #1e262f;
+    }
+    .replace-instruction {
+      background: #1e2a33;
+      border-radius: 12px;
+      padding: 0.75rem 1.2rem;
+      font-size: 0.9rem;
+      border: 1px dashed #f39c12;
+      color: #d0d9e2;
+    }
+    .replace-instruction i {
+      color: #f39c12;
+    }
+    .badge-custom {
+      background: #1e262f;
+      color: #eaeef2;
+      border: 1px solid #2d3845;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      font-weight: 500;
+    }
+    .badge-custom i {
+      color: #f39c12;
+      margin-right: 0.4rem;
+    }
+    .tool-badge {
+      background: #1e262f;
+      border: 1px solid #2d3845;
+      padding: 0.3rem 1rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      color: #d0d9e2;
+    }
+    .tool-badge i {
+      color: #f39c12;
+      margin-right: 6px;
+    }
+    .text-muted-custom {
+      color: #9aa8b9;
+    }
+    [data-lang="en"] .lang-ru {
+      display: none;
+    }
+    [data-lang="ru"] .lang-en {
+      display: none;
+    }
+    .lang-en {
+      display: none;
+    }
+    [data-lang="en"] .lang-en {
+      display: inline;
+    }
+    [data-lang="en"] .lang-ru {
+      display: none;
+    }
+    .lang-switch-block .lang-ru,
+    .lang-switch-block .lang-en {
+      display: block;
+    }
+    [data-lang="en"] .lang-switch-block .lang-ru {
+      display: none;
+    }
+    [data-lang="en"] .lang-switch-block .lang-en {
+      display: block;
+    }
+    [data-lang="ru"] .lang-switch-block .lang-en {
+      display: none;
+    }
+    [data-lang="ru"] .lang-switch-block .lang-ru {
+      display: block;
+    }
+  </style>
+</head>
+<body data-lang="ru">
+
+<!-- ШАПКА -->
+<header class="portfolio-header">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-md-8">
+        <h1 class="display-5 fw-bold lang-switch-block">
+          <span class="lang-ru">Be4stix Edit</span>
+          <span class="lang-en">Be4stix Edit</span>
+        </h1>
+        <p class="lead mb-1 lang-switch-block">
+          <span class="lang-ru">Motion Designer · 2D анимация</span>
+          <span class="lang-en">Motion Designer · 2D Animation</span>
+        </p>
+        <div class="mt-2 d-flex flex-wrap gap-2">
+          <span class="tool-badge"><i class="fas fa-film"></i> After Effects</span>
+          <span class="tool-badge"><i class="fas fa-video"></i> Premiere Pro</span>
+          <span class="tool-badge"><i class="fas fa-pen-fancy"></i> Illustrator</span>
+        </div>
+        <div class="mt-2 small text-muted-custom lang-switch-block">
+          <span class="lang-ru"><i class="far fa-clock"></i> открыт к сотрудничеству</span>
+          <span class="lang-en"><i class="far fa-clock"></i> open for collaboration</span>
+        </div>
+      </div>
+      <div class="col-md-4 text-md-end mt-3 mt-md-0">
+        <div class="d-flex justify-content-md-end gap-2">
+          <button class="lang-btn active" id="langRuBtn" onclick="setLanguage('ru')">RU</button>
+          <button class="lang-btn" id="langEnBtn" onclick="setLanguage('en')">EN</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ЛОГОТИП + УСЛУГИ -->
+<section class="hero-block">
+  <div class="container">
+    <div class="row align-items-center g-4">
+      <div class="col-md-4 col-lg-3 text-center text-md-start">
+        <img src="images\cat_avatar.png" alt="Фото профиля" class="hero-logo img-fluid">
+        <div class="mt-2 small text-muted-custom lang-switch-block">
+          <span class="lang-ru"><i class="far fa-copyright"></i> личный бренд</span>
+          <span class="lang-en"><i class="far fa-copyright"></i> personal brand</span>
+        </div>
+      </div>
+      <div class="col-md-8 col-lg-9">
+        <h2 class="display-6 fw-bold lang-switch-block" style="color: #f0f4f8;">
+          <span class="lang-ru">Что я создаю</span>
+          <span class="lang-en">What I create</span>
+        </h2>
+        <div class="d-flex flex-wrap gap-2 mt-2">
+          <span class="service-badge"><i class="fas fa-play-circle"></i> <span class="lang-ru">2D анимация</span><span class="lang-en">2D/3D animation</span></span>
+          <span class="service-badge"><i class="fas fa-film"></i> <span class="lang-ru">Монтаж видео</span><span class="lang-en">Video editing</span></span>
+          <span class="service-badge"><i class="fas fa-paint-brush"></i> <span class="lang-ru">Моушн-графика</span><span class="lang-en">Motion graphics</span></span>
+        </div>
+        <div class="mt-3 lang-switch-block" style="color: #d0d9e2; max-width: 700px;">
+          <span class="lang-ru"><i class="fas fa-quote-left me-1" style="color: #f39c12;"></i> Создаю динамичную анимацию и видеоконтент для брендов, стартапов и креативных проектов. Работаю с полным циклом: от идеи до финального рендера.</span>
+          <span class="lang-en"><i class="fas fa-quote-left me-1" style="color: #f39c12;"></i> I create dynamic animation and video content for brands, startups and creative projects. Full cycle from concept to final render.</span>
+        </div>
+        <div class="mt-5">
+          <!-- <span class="badge-custom"><i class="fas fa-check-circle"></i> <span class="lang-ru">более 50 проектов</span><span class="lang-en">50+ projects</span></span> -->
+          <span class="badge-custom ms-2"><i class="fas fa-globe"></i> <span class="lang-ru">Международные клиенты</span><span class="lang-en">International clients</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== КАРУСЕЛЬ ОТЗЫВОВ (вместо блока с отзывами) ====== -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title mb-4 lang-switch-block">
+      <span class="lang-ru"><i class="fas fa-star me-2"></i>Отзывы клиентов</span>
+      <span class="lang-en"><i class="fas fa-star me-2"></i>Client Reviews</span>
+    </h2>
+    <div class="review-carousel-wrapper">
+      <div id="reviewsCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="5000">
+        <!-- Индикаторы (точки) -->
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#reviewsCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#reviewsCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <!-- <button type="button" data-bs-target="#reviewsCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#reviewsCarousel" data-bs-slide-to="3" aria-label="Slide 4"></button> -->
+        </div>
+
+        <!-- Слайды -->
+        <div class="carousel-inner">
+          <!-- Слайд 1 -->
+          <div class="carousel-item active">
+            <img src="C:\Users\be4stix\Desktop\GitHub\portfolio_web\images\review_1.png" class="d-block w-100 " alt="Отзыв 1">
+          </div>
+          <!-- Слайд 2 -->
+          <div class="carousel-item">
+            <img src="C:\Users\be4stix\Desktop\GitHub\portfolio_web\images\review_2.png" class="d-block w-100 " alt="Отзыв 2">
+          </div>
+        </div>
+
+        <!-- Кнопки "назад" и "вперёд" -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Предыдущий</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Следующий</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- РАЗДЕЛЫ С РАБОТАМИ -->
+<section class="py-4" style="background: #0f141b;">
+  <div class="container">
+
+    <!-- ПРОМОРОЛИКИ -->
+    <div class="mb-5">
+      <h3 class="category-title lang-switch-block">
+        <span class="lang-ru"><i class="fas fa-bullhorn me-2"></i>Проморолики</span>
+        <span class="lang-en"><i class="fas fa-bullhorn me-2"></i>Promo Videos</span>
+      </h3>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="videos\promo\1_s.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <h5 class="fw-bold lang-switch-block">
+                <span class="lang-ru">Промо "DeepSeek"</span>
+                <span class="lang-en">Promo "DeepSeek"</span>
+              </h5>
+              <p class="text-muted-custom small">After Effects / Premiere Pro · 2026</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="videos\promo\final.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <h5 class="fw-bold lang-switch-block">
+                <span class="lang-ru">Промо "ColdCall"</span>
+                <span class="lang-en">Promo "ColdCall"</span>
+              </h5>
+              <p class="text-muted-custom small">After Effects / Premiere Pro · 2026</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="videos\promo\cafe.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <h5 class="fw-bold lang-switch-block">
+                <span class="lang-ru">Промо для кафе</span>
+                <span class="lang-en">Promo for a Cafe</span>
+              </h5>
+              <p class="text-muted-custom small">After Effects / Premiere Pro · 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ЗАСТАВКИ -->
+    <div class="mb-5">
+      <h3 class="category-title lang-switch-block">
+        <span class="lang-ru"><i class="fas fa-photo-video me-2"></i>Заставки / Интро</span>
+        <span class="lang-en"><i class="fas fa-photo-video me-2"></i>Intros / Openers</span>
+      </h3>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="videos\intro&outro\white_glow_s_4.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <h5 class="fw-bold lang-switch-block">
+                <span class="lang-ru">Заставка YouTube</span>
+                <span class="lang-en">YouTube Intro</span>
+              </h5>
+              <p class="text-muted-custom small">After Effects / Premiere Pro · 2026</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="videos\intro&outro\service_intro.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <h5 class="fw-bold lang-switch-block">
+                <span class="lang-ru">Интро для YouTube</span>
+                <span class="lang-en">YouTube Intro</span>
+              </h5>
+              <p class="text-muted-custom small">After Effects / Premiere Pro · 2026</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="videos\intro&outro\markcity.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <h5 class="fw-bold lang-switch-block">
+                <span class="lang-ru">Корпоративная заставка</span>
+                <span class="lang-en">Corporate Opener</span>
+              </h5>
+              <p class="text-muted-custom small">After Effects / Premiere Pro · 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- АНИМАЦИЯ ЛОГОТИПОВ -->
+    <div class="mb-3">
+      <h3 class="category-title lang-switch-block">
+        <span class="lang-ru"><i class="fas fa-trademark me-2"></i>Анимация логотипов</span>
+        <span class="lang-en"><i class="fas fa-trademark me-2"></i>Logo Animation</span>
+      </h3>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-4">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="videos\logo\pin.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <h5 class="fw-bold lang-switch-block">
+                <span class="lang-ru">Логотип "Nature"</span>
+                <span class="lang-en">Logo "Nature"</span>
+              </h5>
+              <p class="text-muted-custom small">After Effects / Illustrator · 2026</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="videos\logo\s_1.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <h5 class="fw-bold lang-switch-block">
+                <span class="lang-ru">Логотип "Catgo"</span>
+                <span class="lang-en">Logo "Catgo"</span>
+              </h5>
+              <p class="text-muted-custom small">After Effects / Premiere Pro · 2026</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="video-card">
+            <div class="video-wrapper">
+              <video controls playsinline preload="metadata">
+                <source src="videos\logo\7.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="card-body">
+              <h5 class="fw-bold lang-switch-block">
+                <span class="lang-ru">Логотип "Favorit"</span>
+                <span class="lang-en">Logo "Favorit"</span>
+              </h5>
+              <p class="text-muted-custom small">After Effects / Illustrator · 2026</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- СОЦСЕТИ -->
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title mb-4 lang-switch-block">
+      <span class="lang-ru"><i class="fas fa-share-alt me-2"></i>Соцсети</span>
+      <span class="lang-en"><i class="fas fa-share-alt me-2"></i>Social</span>
+    </h2>
+    <div class="d-flex flex-wrap gap-3 align-items-center">
+      <a href="https://www.instagram.com/be4stix_ed1t" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.fiverr.com/users/be4stix_edit/portfolio" class="social-icon" aria-label="LinkedIn">fi</a>
+      <span class="ms-2 text-muted-custom lang-switch-block">
+        <span class="lang-ru"><i class="far fa-envelope me-1"></i> be4stixedit@gmail.com</span>
+        <span class="lang-en"><i class="far fa-envelope me-1"></i> be4stixedit@gmail.com</span>
+      </span>
+    </div>
+    <div class="mt-3 text-muted-custom small lang-switch-block">
+      <span class="lang-ru">✉️ Для заказов и коллабораций — пишите в соцсети или на почту.</span>
+      <span class="lang-en">✉️ For commissions & collab — DM or email.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ФУТЕР -->
+<footer class="footer-note py-3 mt-3">
+  <div class="container text-center text-muted-custom small">
+    <span class="lang-ru">© 2026 Be4stix Edit · портфолио</span>
+    <span class="lang-en">© 2026 Be4stix Edit · portfolio</span>
+  </div>
+</footer>
+
+<script>
+  function setLanguage(lang) {
+    document.body.setAttribute('data-lang', lang);
+    document.getElementById('langRuBtn').classList.toggle('active', lang === 'ru');
+    document.getElementById('langEnBtn').classList.toggle('active', lang === 'en');
+    localStorage.setItem('portfolioLang', lang);
+  }
+  document.addEventListener('DOMContentLoaded', function() {
+    const savedLang = localStorage.getItem('portfolioLang');
+    if (savedLang === 'en' || savedLang === 'ru') {
+      setLanguage(savedLang);
+    } else {
+      const current = document.body.getAttribute('data-lang') || 'ru';
+      setLanguage(current);
+    }
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
